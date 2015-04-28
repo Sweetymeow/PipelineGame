@@ -2,9 +2,9 @@
 date_default_timezone_set('America/New_York');
 // define location of Parse PHP SDK, e.g. location in "Parse" folder
 // Defaults to ./Parse/ folder. Add trailing slash
-define( 'PARSE_SDK_DIR', 'vendor/parse/' );
+define( 'PARSE_SDK_DIR', './vendor/parse/' );
 
-require 'vendor/autoload.php';
+require './vendor/autoload.php';
   
 // Add the "use" declarations where you'll be using the classes
 use Parse\ParseClient;
