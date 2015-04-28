@@ -1,20 +1,5 @@
 <?php
-session_start();
-// start a session for each user(end when your close brower).
-$flashKey = isset($_GET['key1']);
-
-if ($flashKey) { 
-	// Get Data from Flash
-	$saveKey = $_GET['key1'];
-	$_SESSION["pipeNum"] = $_GET['key1'];
-	$myfile = fopen("pipename.txt", "w") or die("Unable to open file!");
-	fwrite($myfile, $saveKey);
-	$myfile = fopen("pipename.txt", "r") or die("Unable to open file!");
-	echo "Accept key1 data: ";
-	echo fgets($myfile);
-	echo "\n";
-	fclose($myfile);
-}
+date_default_timezone_set('America/New_York');
 // define location of Parse PHP SDK, e.g. location in "Parse" folder
 // Defaults to ./Parse/ folder. Add trailing slash
 define( 'PARSE_SDK_DIR', 'vendor/parse/' );
@@ -30,10 +15,20 @@ ParseClient::initialize('BbrZSp4nxzHdR7KluZ4nhfbwcjnPq0I6mFWd1lSV',
 	'gCT5llenbFQcidG1zeIdGSfCiavCKyzInLZihgk2', 
 	'BZsLFSeWkcT7nvaddlHY20LpP8GrGrxs3ZV9gSLb');
 
-// save something to class TestObject
-$testObject = ParseObject::create("TestObject");
-$testObject->set("UserID", "sweetymeow");
-$testObject->save();
+session_start();
+// start a session for each user(end when your close brower).
+$flashKey = isset($_GET['key1']);
+
+if ($flashKey) { 
+	// Get Data from Flash
+	$saveKey = $_GET['key1'];
+	$_SESSION["pipeNum"] = $_GET['key1'];
+	// save something to class TestObject
+	$pipeNumObj = ParseObject::create("PipeNumObj");
+	$pipeNumObj->set("UserID", "flashKey");
+	$pipeNumObj->set("pipeNum", $saveKey);
+	$pipeNumObj->save();
+}
 
 // // get the object ID
 // echo $testObject->getObjectId();
@@ -52,11 +47,14 @@ $testObject->save();
 
 // Get Data from Unity
 if (isset($_GET['getkey'])) {
-	// Read txt file in Sties Folder(LocalHost)
-	$myunityfile= fopen("pipename.txt", "r") or die("Unable to open file!");
-	//echo fgets($myunityfile);
-	fclose($myunityfile);
-	echo $_SESSION["pipeNum"];
+	$pipeNumQuery = new ParseQuery("PipeNumObj");
+	$pipeNumQuery->limit(1);
+	$resultsNum = $pipeNumQuery->first();
+	if(isset($_SESSION["pipeNum"])){
+		echo $_SESSION["pipeNum"];
+	}else if($resultsNum){
+		echo $resultsNum;
+	}
 	# code...
 }
 
