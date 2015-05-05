@@ -32,6 +32,21 @@ if ($flashKey) {
 	$pipeNumObj->save();
 }
 
+// // get the object ID
+// echo $testObject->getObjectId();
+
+// echo '<h1>Users</h1>';
+
+// // get the first 10 users from built-in User class
+// $query = new ParseQuery("_User");
+// $query->limit(10);
+// $results = $query->find();
+
+// foreach ( $results as $result ) {
+//   // echo user Usernames
+//   echo $result->get('username') . '<br/>';
+// }
+
 // Get Data from Unity
 if (isset($_GET['getkey'])) {
 	$pipeNumQuery = new ParseQuery("PipeNumObj");
@@ -46,4 +61,16 @@ if (isset($_GET['getkey'])) {
 	}
 	# code...
 }
+
+$pipeNumQuery = new ParseQuery("PipeNumObj");
+$pipeNumQuery->limit(5);
+$pipeNumQuery->descending("createdAt");
+$resultsNum = $pipeNumQuery->first();
+//echo $resultsNum->get('UserID') . '<bt>'. $resultsNum->get('pipeNum') ;
+if(isset($_SESSION["pipeNum"])){
+	echo $_SESSION["pipeNum"];
+}else if($resultsNum){
+	echo $resultsNum->get('pipeNum');
+}
+
 ?>

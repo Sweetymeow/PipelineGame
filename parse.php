@@ -17,7 +17,7 @@ ParseClient::initialize('BbrZSp4nxzHdR7KluZ4nhfbwcjnPq0I6mFWd1lSV',
 
 // save something to class TestObject
 $testObject = ParseObject::create("TestObject");
-$testObject->set("UserID", "sweetymeow4");
+$testObject->set("UserID", "sweetymeow6");
 $testObject->save();
 echo 'OK2';
 
@@ -28,9 +28,12 @@ echo '<h1>Users</h1>';
 
 // get the first 10 users from built-in User class
 $userQuery = new ParseQuery("TestObject");
-$userQuery->limit(10);
+$userQuery->limit(5);
+$userQuery->descending("createdAt");
+$userFirst = $userQuery->first();
 $userResults = $userQuery->find();
-echo 'OK';
+echo $userFirst->get('UserID');
+echo 'OK' . '<br>';
 foreach ( $userResults as $result ) {
   // echo user Usernames
   echo $result->get('UserID') . '<br/>';
