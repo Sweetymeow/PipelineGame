@@ -58,4 +58,17 @@ if (isset($_GET['getkey'])) {
 	# code...
 }
 
+if (isset($_POST['UserID'])) {
+	$userInput = $_POST['UserID'];
+	$pipeNumQuery = new ParseQuery("PipeNumObj");
+	$pipeNumQuery->limit(1);
+	$resultsNum = $pipeNumQuery->first();
+	if(isset($_SESSION["pipeNum"])){
+		echo $_SESSION["pipeNum"];
+	}else if($resultsNum){
+		echo $resultsNum;
+	}
+	# code...
+}
+
 ?>
