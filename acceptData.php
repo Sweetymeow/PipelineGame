@@ -46,7 +46,6 @@ if (isset($_GET['getkey'])) {
 	}
 	# code...
 }
-<<<<<<< HEAD
 
 if (isset($_POST['UserID'])) {
 	$userInput = $_POST['UserID'];
@@ -61,6 +60,4 @@ if (isset($_POST['UserID'])) {
 	# code...
 }
 
-=======
->>>>>>> origin/master
 ?>
