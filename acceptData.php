@@ -4,6 +4,7 @@ date_default_timezone_set('America/New_York');
 // Defaults to ./Parse/ folder. Add trailing slash
 define( 'PARSE_SDK_DIR', 'vendor/parse/' );
 
+require_once('FirePHPCore/FirePHP.class.php');
 require 'vendor/autoload.php';
   
 // Add the "use" declarations where you'll be using the classes
@@ -15,6 +16,7 @@ ParseClient::initialize('BbrZSp4nxzHdR7KluZ4nhfbwcjnPq0I6mFWd1lSV',
 	'gCT5llenbFQcidG1zeIdGSfCiavCKyzInLZihgk2', 
 	'BZsLFSeWkcT7nvaddlHY20LpP8GrGrxs3ZV9gSLb');
 
+ob_start();
 session_start();
 // start a session for each user(end when your close brower).
 $flashKey = isset($_GET['key1']);
@@ -30,33 +32,21 @@ if ($flashKey) {
 	$pipeNumObj->save();
 }
 
-// // get the object ID
-// echo $testObject->getObjectId();
-
-// echo '<h1>Users</h1>';
-
-// // get the first 10 users from built-in User class
-// $query = new ParseQuery("_User");
-// $query->limit(10);
-// $results = $query->find();
-
-// foreach ( $results as $result ) {
-//   // echo user Usernames
-//   echo $result->get('username') . '<br/>';
-// }
-
 // Get Data from Unity
 if (isset($_GET['getkey'])) {
 	$pipeNumQuery = new ParseQuery("PipeNumObj");
-	$pipeNumQuery->limit(1);
+	$pipeNumQuery->limit(5);
+	$pipeNumQuery->descending("createdAt");
 	$resultsNum = $pipeNumQuery->first();
+	//echo $resultsNum->get('UserID') . '<bt>'. $resultsNum->get('pipeNum') ;
 	if(isset($_SESSION["pipeNum"])){
 		echo $_SESSION["pipeNum"];
 	}else if($resultsNum){
-		echo $resultsNum;
+		echo $resultsNum->get('pipeNum');
 	}
 	# code...
 }
+<<<<<<< HEAD
 
 if (isset($_POST['UserID'])) {
 	$userInput = $_POST['UserID'];
@@ -71,4 +61,6 @@ if (isset($_POST['UserID'])) {
 	# code...
 }
 
+=======
+>>>>>>> origin/master
 ?>
