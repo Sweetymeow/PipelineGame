@@ -41,7 +41,7 @@ if (isset($_GET['getkey'])) {
 	//echo $resultsNum->get('UserID') . '<bt>'. $resultsNum->get('pipeNum') ;
 	if(isset($_SESSION["pipeNum"])){
 		echo $_SESSION["pipeNum"];
-	}else if($resultsNum->get('pipeNum')){
+	}else if($resultsNum){
 		echo $resultsNum->get('pipeNum');
 	}
 	# code...
@@ -61,4 +61,25 @@ if (isset($_POST['UserID'])) {
     }
 	# code...
 }
+
+//echo 'OK';
+//echo '<h3>Users</h3>';
+//$userInput = "wendy";
+//$userPipeQuery = new ParseQuery("PipeNumObj");
+//$userPipeQuery->equalTo("UserID", $userInput);
+//$userPipeQuery->limit(5);
+//$userPipeQuery->descending("createdAt");
+//$resultsNum = $userPipeQuery ->first();
+//$resultsNums = $userPipeQuery ->find();
+//echo 'OK';
+//if(isset($_SESSION["pipeNum"])){
+//    echo $_SESSION["pipeNum"];
+//}else if($resultsNum->get('pipeNum')){
+//    echo $resultsNum->get('pipeNum'). '<br/>';
+//}
+//foreach ( $resultsNums as $result ) {
+//  // echo user Usernames
+//  echo $result->get('UserID') .' : '. $result->get('pipeNum') . '<br/>';
+//}
+
 ?>
