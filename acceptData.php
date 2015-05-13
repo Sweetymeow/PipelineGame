@@ -24,10 +24,15 @@ $flashKey = isset($_GET['key1']);
 if ($flashKey) { 
 	// Get Data from Flash
 	$saveKey = $_GET['key1'];
+	$saveId = $_GET['keyId'];
 	$_SESSION["pipeNum"] = $_GET['key1'];
 	// save something to class TestObject
 	$pipeNumObj = ParseObject::create("PipeNumObj");
-	$pipeNumObj->set("UserID", "flashKey");
+	if($saveId = $_GET['keyId']){
+		$pipeNumObj->set("UserID", $saveId);
+	}else{
+		$pipeNumObj->set("UserID", "FlashUser");
+	}
 	$pipeNumObj->set("pipeNum", $saveKey);
 	$pipeNumObj->save();
 }
